@@ -1,4 +1,6 @@
 bluge plugin
 ===
 
-Analysis plugin for [bluge](https://github.com/blugelabs/bluge/).
+Analysis plugins for the [bluge](https://github.com/blugelabs/bluge/) indexing/search library.
+
+
