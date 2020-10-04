@@ -44,8 +44,8 @@ github.com/ikawaha/kagome-dict v1.0.0/go.mod h1:pbeH4qwp/LVWKNePhU4Mh11w/l8uUSXK
 github.com/ikawaha/kagome-dict/ipa v1.0.0 h1:lba8YN1I5Re+gsbZlbholc8m3uvPPsXE42UGv3F+1sE=
 github.com/ikawaha/kagome-dict/ipa v1.0.0/go.mod h1:mqE9C9OxRA1ezgMNpqXxmwktbxmSFl77F69D44iwEOs=
 github.com/ikawaha/kagome-dict/uni v1.0.0/go.mod h1:8oJiibyuTyZ/XmqAaikks0jgvJljtN6MHfwac2TxK+4=
-github.com/ikawaha/kagome/v2 v2.1.1-0.20201001092312-1422f25b449e h1:PxjUMI2idtN6abMkZffsuOCL2KAFLG76ouMs4DUCLx4=
-github.com/ikawaha/kagome/v2 v2.1.1-0.20201001092312-1422f25b449e/go.mod h1:cl05rWflSI2Rh9SnN1ZdVOI9STCObzKZbTNFsScgJF0=
+github.com/ikawaha/kagome/v2 v2.1.1-0.20201004043209-69366f578feb h1:giYbOlUzw2Sn1cY1a+lf9YTgC64bUudPblDEEHscmUA=
+github.com/ikawaha/kagome/v2 v2.1.1-0.20201004043209-69366f578feb/go.mod h1:cl05rWflSI2Rh9SnN1ZdVOI9STCObzKZbTNFsScgJF0=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/influxdata/influxdb v1.7.6/go.mod h1:qZna6X/4elxqT3yI9iZYdZrWWdeFOOprn86kgg4+IzY=
 github.com/jtolds/gls v4.20.0+incompatible h1:xdiiI2gbIgH/gLH7ADydsJ1uDOEzR8yvV7C0MuV77Wo=
