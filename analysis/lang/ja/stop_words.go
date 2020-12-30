@@ -4,7 +4,8 @@ import (
 	"github.com/blugelabs/bluge/analysis"
 )
 
-// https://github.com/apache/lucene-solr/blob/master/lucene/analysis/kuromoji/src/resources/org/apache/lucene/analysis/ja/stopwords.txt
+// StopWordsBytes is a stop word list.
+// see. https://github.com/apache/lucene-solr/blob/master/lucene/analysis/kuromoji/src/resources/org/apache/lucene/analysis/ja/stopwords.txt
 var StopWordsBytes = []byte(`
 #
 # This file defines a stopword set for Japanese.
@@ -135,6 +136,7 @@ var StopWordsBytes = []byte(`
 ##### End of file
 `)
 
+// StopWords returns a stop words map.
 func StopWords() analysis.TokenMap {
 	rv := analysis.NewTokenMap()
 	rv.LoadBytes(StopWordsBytes)

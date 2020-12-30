@@ -6,15 +6,16 @@ import (
 	"golang.org/x/text/unicode/norm"
 )
 
+// Analyzer returns the analyzer suite in Japanese.
 func Analyzer() *analysis.Analyzer {
 	return &analysis.Analyzer{
 		CharFilters: []analysis.CharFilter{
 			NewUnicodeNormalizeCharFilter(norm.NFKC),
 		},
-		Tokenizer: Tokenizer(StopTagsFilter(), BaseFormFilter()),
+		Tokenizer: NewJapaneseTokenizer(StopTagsFilter(), BaseFormFilter()),
 		TokenFilters: []analysis.TokenFilter{
 			token.NewLowerCaseFilter(),
-			StopWordsFilter(),
+			NewStopWordsFilter(),
 		},
 	}
 }
