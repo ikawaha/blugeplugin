@@ -5,12 +5,16 @@ import (
 	"golang.org/x/text/unicode/norm"
 )
 
-type JapaniseNormalizeFilter struct {}
-
-func (f JapaniseNormalizeFilter) Filter(input []byte) []byte{
-	return norm.NFKC.Bytes(input)
+type UnicodeNormalizeCharFilter struct {
+	form norm.Form
 }
 
-func NormalizeFilter() analysis.CharFilter{
-	return JapaniseNormalizeFilter{}
+func (f UnicodeNormalizeCharFilter) Filter(input []byte) []byte {
+	return f.form.Bytes(input)
+}
+
+func NewUnicodeNormalizeCharFilter(form norm.Form) analysis.CharFilter {
+	return UnicodeNormalizeCharFilter{
+		form: form,
+	}
 }

@@ -1,7 +1,7 @@
 package ja
 
 import (
-"github.com/blugelabs/bluge/analysis"
+	"github.com/blugelabs/bluge/analysis"
 )
 
 // https://github.com/apache/lucene-solr/blob/master/lucene/analysis/kuromoji/src/resources/org/apache/lucene/analysis/ja/stoptags.txt
@@ -433,4 +433,3 @@ func StopTags() analysis.TokenMap {
 	rv.LoadBytes(StopTagsBytes)
 	return rv
 }
-

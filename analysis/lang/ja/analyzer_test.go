@@ -9,54 +9,68 @@ import (
 
 func TestJapaneseAnalyzer(t *testing.T) {
 	tests := []struct {
-		title string
+		title  string
 		input  []byte
 		output analysis.TokenStream
 	}{
 		{
-			title: "tokenize",
-			input: []byte("関西国際空港"),
+			title: "char filter",
+			input: []byte("㌫"),
 			output: analysis.TokenStream{
-				&analysis.Token{
-					Term:         []byte("関西"),
-					PositionIncr: 1,
+				{
+					Term:         []byte("パーセント"),
 					Start:        0,
-					End:          6,
-					Type: analysis.Ideographic,
-				},
-				&analysis.Token{
-					Term:         []byte("国際"),
+					End:          15,
 					PositionIncr: 1,
-					Start:        6,
-					End:          12,
-					Type: analysis.Ideographic,
-				},
-				&analysis.Token{
-					Term:         []byte("空港"),
-					PositionIncr: 1,
-					Start:        12,
-					End:          18,
-					Type: analysis.Ideographic,
+					Type:         analysis.Ideographic,
+					KeyWord:      false,
 				},
 			},
 		},
 		{
-			title: "filtered results:うなぎ",
-			input: []byte("私は鰻"),
+			title: "tokenize",
+			input: []byte("関西国際空港"),
 			output: analysis.TokenStream{
-				&analysis.Token{
-					Term:         []byte("私"),
+				{
+					Term:         []byte("関西"),
 					PositionIncr: 1,
 					Start:        0,
-					End:          3,
-					Type: analysis.Ideographic,
+					End:          6,
+					Type:         analysis.Ideographic,
 				},
-				&analysis.Token{
-					Term:         []byte("鰻"),
-					PositionIncr: 2,
+				{
+					Term:         []byte("国際"),
+					PositionIncr: 1,
 					Start:        6,
-					End:          9,
-					Type: analysis.Ideographic,
+					End:          12,
+					Type:         analysis.Ideographic,
+				},
+				{
+					Term:         []byte("空港"),
+					PositionIncr: 1,
+					Start:        12,
+					End:          18,
+					Type:         analysis.Ideographic,
+				},
+			},
+		},
+		{
+			title: "filtered results: stop tags filter & stop word filter",
+			input: []byte("これらは私の猫"),
+			output: analysis.TokenStream{
+				{
+					Term:         []byte("私"),
+					PositionIncr: 3,
+					Start:        12,
+					End:          15,
+					Type:         analysis.Ideographic,
+				},
+				{
+					Term:         []byte("猫"),
+					PositionIncr: 2,
+					Start:        18,
+					End:          21,
+					Type:         analysis.Ideographic,
 				},
 			},
 		},
@@ -85,40 +99,40 @@ func TestJapaneseAnalyzer(t *testing.T) {
 			title: "filtered results:赤い蝋燭と人魚",
 			input: []byte("人魚は、南の方の海にばかり棲んでいるのではありません。"),
 			output: analysis.TokenStream{
-				&analysis.Token{
+				{
 					Term:         []byte("人魚"),
 					PositionIncr: 1,
 					Start:        0,
 					End:          6,
-					Type: analysis.Ideographic,
+					Type:         analysis.Ideographic,
 				},
-				&analysis.Token{
+				{
 					Term:         []byte("南"),
 					PositionIncr: 3,
 					Start:        12,
 					End:          15,
-					Type: analysis.Ideographic,
+					Type:         analysis.Ideographic,
 				},
-				&analysis.Token{
+				{
 					Term:         []byte("方"),
 					PositionIncr: 2,
 					Start:        18,
 					End:          21,
-					Type: analysis.Ideographic,
+					Type:         analysis.Ideographic,
 				},
-				&analysis.Token{
+				{
 					Term:         []byte("海"),
 					PositionIncr: 2,
 					Start:        24,
 					End:          27,
-					Type: analysis.Ideographic,
+					Type:         analysis.Ideographic,
 				},
-				&analysis.Token{
-					Term:         []byte("棲ん"),
+				{
+					Term:         []byte("棲む"), // base form
 					PositionIncr: 3,
 					Start:        39,
 					End:          45,
-					Type: analysis.Ideographic,
+					Type:         analysis.Ideographic,
 				},
 			},
 		},
@@ -135,11 +149,11 @@ func TestJapaneseAnalyzer(t *testing.T) {
 	}
 }
 
-func BenchmarkJapaneseAnalyzer(b *testing.B){
+func BenchmarkJapaneseAnalyzer(b *testing.B) {
 	sen := []byte("人魚は、南の方の海にばかり棲んでいるのではありません。")
 	analyzer := Analyzer()
 	b.ResetTimer()
-	for i:=0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {
 		analyzer.Analyze(sen)
 	}
 }
