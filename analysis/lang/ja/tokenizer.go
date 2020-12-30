@@ -55,7 +55,7 @@ func (t *JapaneseTokenizer) Tokenize(input []byte) analysis.TokenStream {
 		start := v.Position
 		end := v.Position + len(v.Surface)
 		term := input[start:end]
-		if pos := v.POS(); DefaultInflected.Match(pos) {
+		if pos := v.POS(); t.baseFormFilter.Match(pos) {
 			if base, ok := v.BaseForm(); ok {
 				term = []byte(base)
 			}
