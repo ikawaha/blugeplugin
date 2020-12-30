@@ -4,7 +4,8 @@ import (
 	"github.com/blugelabs/bluge/analysis"
 )
 
-// https://github.com/apache/lucene-solr/blob/master/lucene/analysis/kuromoji/src/resources/org/apache/lucene/analysis/ja/stoptags.txt
+// StopTagsBytes is a stop tag list.
+// see. https://github.com/apache/lucene-solr/blob/master/lucene/analysis/kuromoji/src/resources/org/apache/lucene/analysis/ja/stoptags.txt
 var StopTagsBytes = []byte(`
 #
 # This file defines a Japanese stoptag set for JapanesePartOfSpeechStopFilter.
@@ -428,6 +429,7 @@ var StopTagsBytes = []byte(`
 ##### End of file
 `)
 
+// StopTags returns a stop tags map.
 func StopTags() analysis.TokenMap {
 	rv := analysis.NewTokenMap()
 	rv.LoadBytes(StopTagsBytes)
