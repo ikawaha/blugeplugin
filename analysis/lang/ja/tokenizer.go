@@ -1,14 +1,23 @@
 package ja
 
 import (
+	"bufio"
+	"bytes"
 	"strings"
-	"unsafe"
 
 	"github.com/blugelabs/bluge/analysis"
 	"github.com/ikawaha/kagome-dict/ipa"
 	"github.com/ikawaha/kagome/v2/filter"
 	"github.com/ikawaha/kagome/v2/tokenizer"
 )
+
+var splitter = filter.SentenceSplitter{
+	Delim:               []rune{'。', '．', '！', '!', '？', '?'},
+	Follower:            []rune{'.', '｣', '」', '』', ')', '）', '｝', '}', '〉', '》'},
+	SkipWhiteSpace:      false,
+	DoubleLineFeedSplit: true,
+	MaxRuneLen:          128,
+}
 
 // DefaultInflected represents POSs which has inflected form.
 var DefaultInflected = filter.NewPOSFilter(
@@ -48,30 +57,51 @@ type JapaneseTokenizer struct {
 
 // Tokenize tokenizes the input and filters them.
 func (t *JapaneseTokenizer) Tokenize(input []byte) analysis.TokenStream {
-	tokens := t.Analyze(*(*string)(unsafe.Pointer(&input)), tokenizer.Search)
-	t.stopTagFilter.Drop(&tokens)
-	ret := make(analysis.TokenStream, 0, len(tokens))
-	for i, v := range tokens {
-		start := v.Position
-		end := v.Position + len(v.Surface)
-		term := input[start:end]
-		if pos := v.POS(); t.baseFormFilter.Match(pos) {
-			if base, ok := v.BaseForm(); ok {
-				term = []byte(base)
+	scanner := bufio.NewScanner(bytes.NewReader(input))
+	scanner.Split(splitter.ScanSentences)
+	base := 0
+	prevIncr := 0
+	var ret analysis.TokenStream
+	for scanner.Scan() {
+		inp := scanner.Text()
+		tokens := t.Analyze(inp, tokenizer.Search)
+		before := len(tokens)
+		if t.stopTagFilter != nil {
+			t.stopTagFilter.Drop(&tokens)
+		}
+		after := 0
+		if len(tokens) > 0 {
+			after = tokens[len(tokens)-1].Index + 1
+		}
+		for i, v := range tokens {
+			start := base + v.Position
+			end := base + v.Position + len(v.Surface)
+			term := input[start:end]
+			if t.baseFormFilter != nil {
+				if pos := v.POS(); t.baseFormFilter.Match(pos) {
+					if base, ok := v.BaseForm(); ok {
+						term = []byte(base)
+					}
+				}
 			}
+			incr := 0
+			if i == 0 {
+				incr = prevIncr + v.Index + 1
+				prevIncr = 0
+			} else {
+				incr = v.Index - tokens[i-1].Index
+			}
+			ret = append(ret, &analysis.Token{
+				Start:        start,
+				End:          end,
+				Term:         term,
+				PositionIncr: incr,
+				Type:         analysis.Ideographic,
+				KeyWord:      false,
+			})
 		}
-		incr := 1
-		if i > 0 {
-			incr = v.Index - tokens[i-1].Index
-		}
-		ret = append(ret, &analysis.Token{
-			Start:        start,
-			End:          end,
-			Term:         term,
-			PositionIncr: incr,
-			Type:         analysis.Ideographic,
-			KeyWord:      false,
-		})
+		base += len(inp)
+		prevIncr = prevIncr + (before - after)
 	}
 	return ret
 }
