@@ -9,6 +9,18 @@ Analysis plugins for the [bluge](https://github.com/blugelabs/bluge/) indexing/s
 blog: https://zenn.dev/ikawaha/articles/20201230-84b042603ccbbce645d5
 
 ```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/blugelabs/bluge"
+	segment "github.com/blugelabs/bluge_segment_api"
+	"github.com/ikawaha/blugeplugin/analysis/lang/ja"
+)
+
 func main() {
 	// サンプルなので in memory で済ませる
 	config := bluge.InMemoryOnlyConfig()
