@@ -12,5 +12,5 @@ require (
 	github.com/mschoch/smat v0.2.0 // indirect
 	github.com/tinylib/msgp v1.1.5 // indirect
 	github.com/willf/bitset v1.1.11 // indirect
-	golang.org/x/text v0.3.5
+	golang.org/x/text v0.3.6
 )
