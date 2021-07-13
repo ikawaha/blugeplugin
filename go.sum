@@ -6,13 +6,14 @@ github.com/RoaringBitmap/roaring v0.5.5/go.mod h1:puNo5VdzwbaIQxSiDIwfXl4Hnc+fbo
 github.com/ajstarks/svgo v0.0.0-20180226025133-644b8db467af/go.mod h1:K08gAheRH3/J6wwsYMMT4xOr94bZjxIelGM0+d/wbFw=
 github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod h1:grANhF5doyWs3UAsr3K4I6qtAmlQcZDesFNEHPZAzj8=
 github.com/axiomhq/hyperloglog v0.0.0-20191112132149-a4c4c47bc57f/go.mod h1:2stgcRjl6QmW+gU2h5E7BQXg4HU0gzxKWDuT5HviN9s=
+github.com/bits-and-blooms/bitset v1.2.0/go.mod h1:gIdJ4wp64HaoK2YrL1Q5/N7Y16edYb8uY+O0FJTyyDA=
 github.com/blevesearch/go-porterstemmer v1.0.3 h1:GtmsqID0aZdCSNiY8SkuPJ12pD4jI+DdXTAn4YRcHCo=
 github.com/blevesearch/go-porterstemmer v1.0.3/go.mod h1:angGc5Ht+k2xhJdZi511LtmxuEf0OVpvUUNrwmM1P7M=
 github.com/blevesearch/mmap-go v1.0.2/go.mod h1:ol2qBqYaOUsGdm7aRMRrYGgPvnwLe6Y+7LMvAB5IbSA=
 github.com/blevesearch/segment v0.9.0/go.mod h1:9PfHYUdQCgHktBgvtUOF4x+pc4/l8rdH0u5spnW85UQ=
 github.com/blevesearch/snowballstem v0.9.0/go.mod h1:PivSj3JMc8WuaFkTSRDW2SlrulNWPl4ABg1tC/hlgLs=
-github.com/blugelabs/bluge v0.1.5 h1:05bzpZO9eEafIhEUQdUnL96oCAI15dqOvrcjYzRd7M8=
-github.com/blugelabs/bluge v0.1.5/go.mod h1:Ah8c1+vYuQiL26j2SXwyt2OPQhcE75q9LTtUVQx0hYA=
+github.com/blugelabs/bluge v0.1.6 h1:EjfTsAb/BAwuxX2tdM9WqMJAUEvvp0vlLDK45DBWfwE=
+github.com/blugelabs/bluge v0.1.6/go.mod h1:8TixTyiqkgZVcsq+laqIgXrcQw9bgz2kGF4PakOTcxk=
 github.com/blugelabs/bluge_segment_api v0.1.0 h1:Z+rj+KYLpdblTAYSjBsuNC79dHB3Oc5exuDBEyAGPnk=
 github.com/blugelabs/bluge_segment_api v0.1.0/go.mod h1:tV1dxZRn5KUxlghf8qWwDs05TdcxaiW+TkXecb7nt54=
 github.com/blugelabs/ice v0.1.1/go.mod h1:qTvShx0ZvYCzF9r5yaHH9lA8a7S34f5xJILlMV/CnlU=

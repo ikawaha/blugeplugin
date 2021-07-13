@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/RoaringBitmap/roaring v0.5.5 // indirect
-	github.com/blugelabs/bluge v0.1.5
+	github.com/blugelabs/bluge v0.1.6
 	github.com/glycerine/go-unsnap-stream v0.0.0-20190901134440-81cf024a9e0a // indirect
 	github.com/golang/snappy v0.0.2 // indirect
 	github.com/ikawaha/kagome-dict/ipa v1.0.3
