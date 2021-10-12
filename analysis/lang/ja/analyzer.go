@@ -12,7 +12,7 @@ func Analyzer() *analysis.Analyzer {
 		CharFilters: []analysis.CharFilter{
 			NewUnicodeNormalizeCharFilter(norm.NFKC),
 		},
-		Tokenizer: NewJapaneseTokenizer(StopTagsFilter(), BaseFormFilter()),
+		Tokenizer: NewJapaneseTokenizer(DefaultStopTagsFilter(), DefaultBaseFormFilter()),
 		TokenFilters: []analysis.TokenFilter{
 			token.NewLowerCaseFilter(),
 			NewStopWordsFilter(),

@@ -114,8 +114,8 @@ func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 			name:  "文分割・フィルターあり",
 			input: []byte("私は鰻。ねこはいます。"),
 			opts: []TokenizerOption{
-				StopTagsFilter(),
-				BaseFormFilter(),
+				DefaultStopTagsFilter(),
+				DefaultBaseFormFilter(),
 			},
 			want: analysis.TokenStream{
 				{
@@ -165,8 +165,8 @@ func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 			name:  "文ごとDropされるとき",
 			input: []byte("私は鰻。は。ねこはいます。"),
 			opts: []TokenizerOption{
-				StopTagsFilter(),
-				BaseFormFilter(),
+				DefaultStopTagsFilter(),
+				DefaultBaseFormFilter(),
 			},
 			want: analysis.TokenStream{
 				{
