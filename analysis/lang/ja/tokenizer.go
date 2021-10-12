@@ -29,22 +29,34 @@ var DefaultInflected = filter.NewPOSFilter(
 // TokenizerOption represents an option of the japanese tokenizer.
 type TokenizerOption func(t *JapaneseTokenizer)
 
+// DefaultStopTagsFilter returns a default tags filter option.
+// See the StopTags function.
+func DefaultStopTagsFilter() TokenizerOption {
+	tags := StopTags()
+	ps := make([]filter.POS, 0, len(tags))
+	for k := range tags {
+		ps = append(ps, strings.Split(k, "-"))
+	}
+	return StopTagsFilter(filter.NewPOSFilter(ps...))
+}
+
 // StopTagsFilter returns a stop tags filter option.
-func StopTagsFilter() TokenizerOption {
+func StopTagsFilter(f *filter.POSFilter) TokenizerOption {
 	return func(t *JapaneseTokenizer) {
-		tags := StopTags()
-		ps := make([]filter.POS, 0, len(tags))
-		for k := range tags {
-			ps = append(ps, strings.Split(k, "-"))
-		}
-		t.stopTagFilter = filter.NewPOSFilter(ps...)
+		t.stopTagFilter = f
 	}
 }
 
+// DefaultBaseFormFilter returns a default base form filter option.
+// See DefaultInflected.
+func DefaultBaseFormFilter() TokenizerOption {
+	return BaseFormFilter(DefaultInflected)
+}
+
 // BaseFormFilter returns an base form filter option.
-func BaseFormFilter() TokenizerOption {
+func BaseFormFilter(f *filter.POSFilter) TokenizerOption {
 	return func(t *JapaneseTokenizer) {
-		t.baseFormFilter = DefaultInflected
+		t.baseFormFilter = f
 	}
 }
 
