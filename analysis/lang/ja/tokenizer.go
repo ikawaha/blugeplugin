@@ -6,57 +6,45 @@ import (
 	"strings"
 
 	"github.com/blugelabs/bluge/analysis"
-	"github.com/ikawaha/kagome-dict/ipa"
+	"github.com/ikawaha/kagome-dict/dict"
 	"github.com/ikawaha/kagome/v2/filter"
 	"github.com/ikawaha/kagome/v2/tokenizer"
-)
-
-var splitter = filter.SentenceSplitter{
-	Delim:               []rune{'。', '．', '！', '!', '？', '?'},
-	Follower:            []rune{'.', '｣', '」', '』', ')', '）', '｝', '}', '〉', '》'},
-	SkipWhiteSpace:      false,
-	DoubleLineFeedSplit: true,
-	MaxRuneLen:          128,
-}
-
-// DefaultInflected represents POSs which has inflected form.
-var DefaultInflected = filter.NewPOSFilter(
-	filter.POS{"動詞"},
-	filter.POS{"形容詞"},
-	filter.POS{"形容動詞"},
 )
 
 // TokenizerOption represents an option of the japanese tokenizer.
 type TokenizerOption func(t *JapaneseTokenizer)
 
-// DefaultStopTagsFilter returns a default tags filter option.
-// See the StopTags function.
-func DefaultStopTagsFilter() TokenizerOption {
-	tags := StopTags()
-	ps := make([]filter.POS, 0, len(tags))
-	for k := range tags {
-		ps = append(ps, strings.Split(k, "-"))
-	}
-	return StopTagsFilter(filter.NewPOSFilter(ps...))
-}
+const (
+	posHierarchy      = 4
+	defaultPOSFeature = "*"
+)
 
 // StopTagsFilter returns a stop tags filter option.
-func StopTagsFilter(f *filter.POSFilter) TokenizerOption {
-	return func(t *JapaneseTokenizer) {
-		t.stopTagFilter = f
+func StopTagsFilter(m analysis.TokenMap) TokenizerOption {
+	ps := make([]filter.POS, 0, len(m))
+	for k := range m {
+		pos := strings.Split(k, "-")
+		for i := len(pos); i < posHierarchy; i++ {
+			pos = append(pos, defaultPOSFeature)
+		}
+		ps = append(ps, pos)
 	}
-}
-
-// DefaultBaseFormFilter returns a default base form filter option.
-// See DefaultInflected.
-func DefaultBaseFormFilter() TokenizerOption {
-	return BaseFormFilter(DefaultInflected)
+	ft := filter.NewPOSFilter(ps...)
+	return func(t *JapaneseTokenizer) {
+		t.stopTagFilter = ft
+	}
 }
 
 // BaseFormFilter returns an base form filter option.
-func BaseFormFilter(f *filter.POSFilter) TokenizerOption {
+func BaseFormFilter(m analysis.TokenMap) TokenizerOption {
+	ps := make([]filter.POS, 0, len(m))
+	for k := range m {
+		pos := strings.Split(k, "-")
+		ps = append(ps, pos)
+	}
+	ft := filter.NewPOSFilter(ps...)
 	return func(t *JapaneseTokenizer) {
-		t.baseFormFilter = f
+		t.baseFormFilter = ft
 	}
 }
 
@@ -65,6 +53,14 @@ type JapaneseTokenizer struct {
 	*tokenizer.Tokenizer
 	stopTagFilter  *filter.POSFilter
 	baseFormFilter *filter.POSFilter
+}
+
+var splitter = filter.SentenceSplitter{
+	Delim:               []rune{'。', '．', '！', '!', '？', '?'},
+	Follower:            []rune{'.', '｣', '」', '』', ')', '）', '｝', '}', '〉', '》'},
+	SkipWhiteSpace:      false,
+	DoubleLineFeedSplit: true,
+	MaxRuneLen:          128,
 }
 
 // Tokenize tokenizes the input and filters them.
@@ -119,8 +115,8 @@ func (t *JapaneseTokenizer) Tokenize(input []byte) analysis.TokenStream {
 }
 
 // NewJapaneseTokenizer returns a Japanese tokenizer.
-func NewJapaneseTokenizer(opts ...TokenizerOption) analysis.Tokenizer {
-	t, err := tokenizer.New(ipa.Dict(), tokenizer.OmitBosEos())
+func NewJapaneseTokenizer(dict *dict.Dict, opts ...TokenizerOption) analysis.Tokenizer {
+	t, err := tokenizer.New(dict, tokenizer.OmitBosEos())
 	if err != nil {
 		panic(err)
 	}

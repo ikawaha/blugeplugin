@@ -5,11 +5,14 @@ import (
 	"testing"
 
 	"github.com/blugelabs/bluge/analysis"
+	"github.com/ikawaha/kagome-dict/dict"
+	"github.com/ikawaha/kagome-dict/ipa"
 )
 
 func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 	tests := []struct {
 		name  string
+		dict  *dict.Dict
 		opts  []TokenizerOption
 		input []byte
 		want  analysis.TokenStream
@@ -17,6 +20,7 @@ func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 		{
 			name:  "文分割なし",
 			input: []byte("私は鰻"),
+			dict:  ipa.Dict(),
 			want: analysis.TokenStream{
 				{
 					Start:        0,
@@ -43,6 +47,7 @@ func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 		},
 		{
 			name:  "文分割あり",
+			dict:  ipa.Dict(),
 			input: []byte("私は鰻。ねこはいます。"),
 			want: analysis.TokenStream{
 				{
@@ -112,10 +117,11 @@ func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 		},
 		{
 			name:  "文分割・フィルターあり",
+			dict:  ipa.Dict(),
 			input: []byte("私は鰻。ねこはいます。"),
 			opts: []TokenizerOption{
-				DefaultStopTagsFilter(),
-				DefaultBaseFormFilter(),
+				StopTagsFilter(DefaultStopTags()),
+				BaseFormFilter(DefaultInflected),
 			},
 			want: analysis.TokenStream{
 				{
@@ -163,10 +169,11 @@ func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 			// Start: 30  End: 36  PositionIncr: 1  Token: ます  Type: 1 <drop>
 			// Start: 36  End: 39  PositionIncr: 1  Token: 。  Type: 1 <drop>
 			name:  "文ごとDropされるとき",
+			dict:  ipa.Dict(),
 			input: []byte("私は鰻。は。ねこはいます。"),
 			opts: []TokenizerOption{
-				DefaultStopTagsFilter(),
-				DefaultBaseFormFilter(),
+				StopTagsFilter(DefaultStopTags()),
+				BaseFormFilter(DefaultInflected),
 			},
 			want: analysis.TokenStream{
 				{
@@ -202,9 +209,59 @@ func TestJapaneseTokenizer_Tokenize(t *testing.T) {
 	}
 	for _, v := range tests {
 		t.Run(v.name, func(t *testing.T) {
-			tz := NewJapaneseTokenizer(v.opts...)
+			tz := NewJapaneseTokenizer(v.dict, v.opts...)
 			if got := tz.Tokenize(v.input); !reflect.DeepEqual(got, v.want) {
 				t.Errorf("got %+v, want %+v", got, v.want)
+			}
+		})
+	}
+}
+
+func TestTokenizerDefaultStopTagFilterMatch(t *testing.T) {
+	var tnz JapaneseTokenizer
+	opt := StopTagsFilter(DefaultStopTags())
+	opt(&tnz)
+
+	tests := []struct {
+		name string
+		pos  []string
+		want bool
+	}{
+		{
+			name: "match:接続詞",
+			pos:  []string{"接続詞", "*", "*", "*"},
+			want: true,
+		},
+		{
+			name: "match:助詞-副助詞／並立助詞／終助詞",
+			pos:  []string{"助詞", "副助詞／並立助詞／終助詞", "*", "*"},
+			want: true,
+		},
+		{
+			name: "match:助詞-格助詞-引用",
+			pos:  []string{"助詞", "格助詞", "引用", "*"},
+			want: true,
+		},
+		{
+			name: "not match:名詞-接続詞的",
+			pos:  []string{"名詞", "接続詞的", "*", "*"},
+			want: false,
+		},
+		{
+			name: "not match:名詞-代名詞-一般,*",
+			pos:  []string{"名詞", "代名詞", "一般", "*"},
+			want: false,
+		},
+		{
+			name: "invalid pos hierarchy",
+			pos:  []string{"接続詞", "*", "*"},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tnz.stopTagFilter.Match(tt.pos); got != tt.want {
+				t.Errorf("stopTagsFilter.Match(%+v) = %v, want %v", tt.pos, got, tt.want)
 			}
 		})
 	}
