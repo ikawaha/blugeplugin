@@ -4,6 +4,7 @@ import (
 	_ "embed"
 
 	"github.com/blugelabs/bluge/analysis"
+	"github.com/blugelabs/bluge/analysis/token"
 )
 
 // StopWordsBytes is a stop word list.
@@ -11,9 +12,14 @@ import (
 //go:embed assets/stop_words.txt
 var StopWordsBytes []byte
 
-// StopWords returns a stop words map.
-func StopWords() analysis.TokenMap {
+// DefaultStopWords returns a stop words map.
+func DefaultStopWords() analysis.TokenMap {
 	rv := analysis.NewTokenMap()
 	rv.LoadBytes(StopWordsBytes)
 	return rv
+}
+
+// NewStopWordsFilter returns a stop words filter.
+func NewStopWordsFilter(m analysis.TokenMap) *token.StopTokensFilter {
+	return token.NewStopTokensFilter(m)
 }

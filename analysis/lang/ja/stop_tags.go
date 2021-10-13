@@ -11,8 +11,8 @@ import (
 //go:embed assets/stop_tags.txt
 var StopTagsBytes []byte
 
-// StopTags returns a stop tags map.
-func StopTags() analysis.TokenMap {
+// DefaultStopTags returns a stop tags map (for IPA dict).
+func DefaultStopTags() analysis.TokenMap {
 	rv := analysis.NewTokenMap()
 	rv.LoadBytes(StopTagsBytes)
 	return rv
