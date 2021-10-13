@@ -1,5 +1,6 @@
 run:
-
+  skip-dirs:
+    - tool
 issues:
   exclude-use-default: false
   exclude-rules:
@@ -10,17 +11,10 @@ issues:
 linters:
   enable:
     - gocyclo
-    - staticcheck
-    - govet
-    - golint
+    - revive
   disable:
-    - maligned
     - exhaustive
-    - noctx
     - asciicheck
-    - sqlclosecheck
-    - rowserrcheck
-    - gosec
     - scopelint
   presets:
     - bugs
@@ -30,3 +24,5 @@ linters:
 linters-settings:
   gocyclo:
     min-complexity: 15
+  errcheck:
+    ignore: fmt:.*,io/ioutil:^Read,^Close|^Write|^Shutdown
