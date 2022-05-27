@@ -1,6 +1,6 @@
 module github.com/ikawaha/blugeplugin
 
-go 1.17
+go 1.18
 
 require (
 	github.com/blugelabs/bluge v0.2.1
@@ -11,8 +11,8 @@ require (
 )
 
 require (
-	github.com/RoaringBitmap/roaring v0.9.4 // indirect
-	github.com/bits-and-blooms/bitset v1.2.0 // indirect
+	github.com/RoaringBitmap/roaring v1.1.0 // indirect
+	github.com/bits-and-blooms/bitset v1.2.2 // indirect
 	github.com/blevesearch/go-porterstemmer v1.0.3 // indirect
 	github.com/blugelabs/bluge_segment_api v0.2.0 // indirect
 	github.com/mschoch/smat v0.2.0 // indirect
