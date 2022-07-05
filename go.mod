@@ -3,7 +3,7 @@ module github.com/ikawaha/blugeplugin
 go 1.18
 
 require (
-	github.com/blugelabs/bluge v0.2.1
+	github.com/blugelabs/bluge v0.2.2
 	github.com/ikawaha/kagome-dict v1.0.4
 	github.com/ikawaha/kagome-dict/ipa v1.0.4
 	github.com/ikawaha/kagome/v2 v2.8.0
