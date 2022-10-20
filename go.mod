@@ -4,9 +4,9 @@ go 1.18
 
 require (
 	github.com/blugelabs/bluge v0.2.2
-	github.com/ikawaha/kagome-dict v1.0.6
-	github.com/ikawaha/kagome-dict/ipa v1.0.8
-	github.com/ikawaha/kagome/v2 v2.8.2
+	github.com/ikawaha/kagome-dict v1.0.7
+	github.com/ikawaha/kagome-dict/ipa v1.0.9
+	github.com/ikawaha/kagome/v2 v2.8.3
 	golang.org/x/text v0.4.0
 )
 
