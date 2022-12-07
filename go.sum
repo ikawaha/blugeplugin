@@ -42,8 +42,8 @@ github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMo
 github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0/go.mod h1:E/TSTwGwJL78qG/PmXZO1EjYhfJinVAhrmmHX6Z8B9k=
 github.com/golang/snappy v0.0.1/go.mod h1:/XxbfmMg8lxefKM7IXC3fBNl/7bRcc72aCRzEWrmP2Q=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
-github.com/ikawaha/kagome-dict v1.0.6 h1:8lfZhyePXU5ly4eomAF0Vea3m2ddEGjmp75CkRHbPzw=
-github.com/ikawaha/kagome-dict v1.0.6/go.mod h1:zB+x78YX4OpwiP0ZGo11mX3Tc3RUr1zd5FqpQJV06O4=
+github.com/ikawaha/kagome-dict v1.0.8 h1:a02fJSsTdDbUsScZCX0ongVqOGTvdBzi1fq59v6EMu4=
+github.com/ikawaha/kagome-dict v1.0.8/go.mod h1:VmNAk8sKhI/fD035yzM9uVedkK/+C+iNozsljWjqE5A=
 github.com/ikawaha/kagome-dict/ipa v1.0.8 h1:gsU4oAe9k50k/J+c+Anotm8hI/qIDPteMW2kNhuh+Jo=
 github.com/ikawaha/kagome-dict/ipa v1.0.8/go.mod h1:zh0TOMMCha1waghkEsLuGAmjZ0dmFFhKoAQWoZqi3OQ=
 github.com/ikawaha/kagome/v2 v2.8.2 h1:vpZyqcJvPwSoHGpLp5tV/jkfLu/6xMQp/XiLbqgbHVM=
@@ -85,8 +85,8 @@ golang.org/x/sys v0.0.0-20181221143128-b4a75ba826a6/go.mod h1:STP8DvDyc/dI5b8T5h
 golang.org/x/sys v0.0.0-20190813064441-fde4db37ae7a/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
-golang.org/x/text v0.4.0 h1:BrVqGRd7+k1DiOgtnFvAkoQEWQvBc25ouMJM6429SFg=
-golang.org/x/text v0.4.0/go.mod h1:mrYo+phRRbMaCq/xk9113O4dZlRixOauAjOtrjsXDZ8=
+golang.org/x/text v0.5.0 h1:OLmvp0KP+FVG99Ct/qFiL/Fhk4zp4QQnZ7b2U+5piUM=
+golang.org/x/text v0.5.0/go.mod h1:mrYo+phRRbMaCq/xk9113O4dZlRixOauAjOtrjsXDZ8=
 golang.org/x/tools v0.0.0-20180525024113-a5b4c53f6e8b/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 golang.org/x/tools v0.0.0-20190206041539-40960b6deb8e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 gonum.org/v1/gonum v0.0.0-20180816165407-929014505bf4/go.mod h1:Y+Yx5eoAFn32cQvJDxZx5Dpnq+c3wtXuadVZAcxbbBo=
