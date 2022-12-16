@@ -44,10 +44,10 @@ github.com/golang/snappy v0.0.1/go.mod h1:/XxbfmMg8lxefKM7IXC3fBNl/7bRcc72aCRzEW
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
 github.com/ikawaha/kagome-dict v1.0.8 h1:a02fJSsTdDbUsScZCX0ongVqOGTvdBzi1fq59v6EMu4=
 github.com/ikawaha/kagome-dict v1.0.8/go.mod h1:VmNAk8sKhI/fD035yzM9uVedkK/+C+iNozsljWjqE5A=
-github.com/ikawaha/kagome-dict/ipa v1.0.8 h1:gsU4oAe9k50k/J+c+Anotm8hI/qIDPteMW2kNhuh+Jo=
-github.com/ikawaha/kagome-dict/ipa v1.0.8/go.mod h1:zh0TOMMCha1waghkEsLuGAmjZ0dmFFhKoAQWoZqi3OQ=
-github.com/ikawaha/kagome/v2 v2.8.2 h1:vpZyqcJvPwSoHGpLp5tV/jkfLu/6xMQp/XiLbqgbHVM=
-github.com/ikawaha/kagome/v2 v2.8.2/go.mod h1:JhEWJvSq0RjE6eStA7SMe1u26UdvszWuneB1BJosXZI=
+github.com/ikawaha/kagome-dict/ipa v1.0.9 h1:iQITqQKpYtby83z6IglEKozV2Arbv70JHxIdKf4RRMA=
+github.com/ikawaha/kagome-dict/ipa v1.0.9/go.mod h1:sBGF+9wBZR9NMMY9Ge8ULgntX1pLx4xQgjD8TOvHpCI=
+github.com/ikawaha/kagome/v2 v2.9.0 h1:J5t2JteaqjjKjuHMMA/8Pq9DEuhuuKMPvf8ua097M7w=
+github.com/ikawaha/kagome/v2 v2.9.0/go.mod h1:uHUMeHH+6ORiag4AF55fTQF4PrIuBjKSEsZ6HcUcfJI=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/influxdata/influxdb v1.7.6/go.mod h1:qZna6X/4elxqT3yI9iZYdZrWWdeFOOprn86kgg4+IzY=
 github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
